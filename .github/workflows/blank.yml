@@ -15,8 +15,10 @@ jobs:
 
     - name: download 
       run: |
-        wget https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tgz
-        tar -xzf Python*
+        Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tgz -OutFile Python-3.11.6.tgz 
+        choco install archiver
+        arc unarchive Python-3.11.6.tgz
+        #tar -xzf Python*
     - name: Install WiX Toolset
       run: |
         cd Python-3.11.6
