@@ -1,0 +1,38 @@
+name: Build Release Installer
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install WiX Toolset
+      run: |
+        wget https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tgz
+        tar xf Python*
+        cd Python*
+        choco install wixtoolset
+        # Install Python workload for Visual Studio
+        # Replace with the appropriate Visual Studio version if needed
+        choco install visualstudio2019workloadpython
+
+        # Download extra build dependencies
+        .\Tools\msi\get_externals.bat
+
+        # Build the Python release installer
+        # Replace with the appropriate Python version and options
+        .\Tools\msi\buildrelease.bat -x64
+      shell: powershell
+
+    - name: Upload Installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: python-release-installer
+        path: .\Python*\PCbuild\amd64\en-us
