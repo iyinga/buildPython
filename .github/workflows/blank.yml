@@ -16,8 +16,8 @@ jobs:
     - name: Install WiX Toolset
       run: |
         wget https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tgz
-        tar xf Python*
-        cd Python*
+        tar -xzf Python-3.11.6.tgz
+        cd Python-3.11.6
         choco install wixtoolset
         # Install Python workload for Visual Studio
         # Replace with the appropriate Visual Studio version if needed
