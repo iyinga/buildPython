@@ -15,9 +15,9 @@ jobs:
 
     - name: Install WiX Toolset
       run: |
-        choco install tar
+        choco install archiver
         wget https://www.python.org/ftp/python/3.11.6/Python-3.11.6.tgz
-        tar -xzf Python-3.11.6.tgz
+        arc Python-3.11.6.tgz
         cd Python-3.11.6
         choco install wixtoolset
         # Install Python workload for Visual Studio
